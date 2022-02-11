@@ -1,5 +1,3 @@
-import request
-
 from distutils.log import DEBUG
 from app import app
 

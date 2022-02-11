@@ -5,6 +5,5 @@ from .config import DevConfig
 app = Flask(__name__, instance_relative_config=True)
 
 # setting configarations
-app.config.from_objects(DevConfig)
+app.config.from_object(DevConfig)
 
-from app import views
