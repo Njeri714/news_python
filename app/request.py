@@ -1,4 +1,3 @@
-from urllib.request import Request
 from app import app
 import request
 from .config import Config
@@ -38,7 +37,7 @@ def all_articles_news():
     all_articles_news function displays all news from various sources without specification
     '''
     base_url = all_article_base_url.format(Api_key)
-    all_article_data = Request.get(base_url).json()
+    all_article_data = requests.get(base_url).json()
     all_articles = []
     data_articls = all_article_data.get('articles')
     print(type(data_articls),all_article_data)
@@ -56,3 +55,44 @@ def all_articles_news():
 
     return all_articles
 
+def business_news():
+    '''
+    business_news function for getting data about us business operations
+    '''
+    base_url = business_base_url.format(Api_key)
+    bussiness_articles = requests.get(base_url).json()
+    business_data = []
+    for business in bussiness_articles ['articles']:
+        id = business['source']
+        title = business['title']
+        poster = business['urlToImage']
+        url_link = business['url']
+        description = business['description']
+        published_date = business['publishedAt']
+        content = business['content']
+        
+        articles_object = News_article(id, title, poster, url_link, description, published_date, content)
+        business_data .append(articles_object)
+
+    return business_data
+
+def apple_news():
+    '''
+    apple_news function will handle getting of data from the api, data about apple news
+    '''
+    base_url = apple_base_url.format(Api_key)
+    apple_articles = requests.get(base_url).json()
+    apple_data = []
+    for apple in apple_articles['articles']:
+        id = apple['source']
+        title = apple['title']
+        poster = apple['urlToImage']
+        url_link = apple['url']
+        description = apple['description']
+        published_date = apple['publishedAt']
+        content = apple['content']
+        
+        articles_object = News_article(id, title, poster, url_link, description, published_date, content)
+        apple_data .append(articles_object)
+           
+    return apple_data
